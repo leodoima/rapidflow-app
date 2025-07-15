@@ -2,7 +2,7 @@ import { addEdge, Background, Controls, MiniMap, ReactFlow, useEdgesState, useNo
 import { useCallback } from 'react';
 import colors from 'tailwindcss/colors';
 import '@xyflow/react/dist/style.css';
-import DownloadButton from './components/downloadButton';
+import DockStation from './components/dockStation';
 
 
 const initialNodes = [
@@ -23,6 +23,7 @@ function App() {
 
   return (
     <div className="w-screen h-screen">
+
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -32,11 +33,13 @@ function App() {
         fitView
       >
         <MiniMap />
-        <DownloadButton />
+        <DockStation />
         <Controls showInteractive={false} />
         <Background color={colors.zinc[50]} />
-
       </ReactFlow>
+
+
+
     </div>
   )
 }
