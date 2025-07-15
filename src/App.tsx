@@ -2,6 +2,7 @@ import { addEdge, Background, Controls, MiniMap, ReactFlow, useEdgesState, useNo
 import { useCallback } from 'react';
 import colors from 'tailwindcss/colors';
 import '@xyflow/react/dist/style.css';
+import DownloadButton from './components/downloadButton';
 
 
 const initialNodes = [
@@ -12,7 +13,7 @@ const initialEdges = [{ id: 'n1-n2', source: 'n1', target: 'n2' }];
 
 function App() {
 
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [nodes, _, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const onConnect: OnConnect = useCallback(
@@ -30,8 +31,9 @@ function App() {
         onConnect={onConnect}
         fitView
       >
-        <Controls showInteractive={false} />
         <MiniMap />
+        <DownloadButton />
+        <Controls showInteractive={false} />
         <Background color={colors.zinc[50]} />
 
       </ReactFlow>
