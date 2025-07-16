@@ -1,20 +1,29 @@
-import { addEdge, Background, Controls, MiniMap, ReactFlow, useEdgesState, useNodesState, type OnConnect } from '@xyflow/react'
+import { addEdge, Background, ConnectionMode, Controls, MiniMap, ReactFlow, useEdgesState, useNodesState, type OnConnect } from '@xyflow/react'
 import { useCallback } from 'react';
 import colors from 'tailwindcss/colors';
 import '@xyflow/react/dist/style.css';
 import DockStation from './components/dockStation';
+import { Square } from './components/square';
 
+
+const nodeTypes = {
+  square: Square,
+};
 
 const initialNodes = [
-  { id: 'n1', position: { x: 0, y: 0 }, data: { label: 'Node 1' } },
-  { id: 'n2', position: { x: 0, y: 100 }, data: { label: 'Node 2' } },
-];
-const initialEdges = [{ id: 'n1-n2', source: 'n1', target: 'n2' }];
+  {
+    id: crypto.randomUUID(),
+    type: 'square',
+    data: { label: 'Add text' },
+    position: { x: Math.random() * 400, y: Math.random() * 400 }
+  }
+]
+
 
 function App() {
 
   const [nodes, _, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
   const onConnect: OnConnect = useCallback(
     (params) => setEdges((edgesSnapshot) => addEdge(params, edgesSnapshot)),
@@ -25,20 +34,20 @@ function App() {
     <div className="w-screen h-screen">
 
       <ReactFlow
+        fitView
         nodes={nodes}
         edges={edges}
+        onConnect={onConnect}
+        nodeTypes={nodeTypes}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
-        fitView
+        connectionMode={ConnectionMode.Loose}
       >
         <MiniMap />
         <DockStation />
         <Controls showInteractive={false} />
-        <Background color={colors.zinc[50]} />
+        <Background color={colors.zinc[100]} gap={12} size={2} />
       </ReactFlow>
-
-
 
     </div>
   )
