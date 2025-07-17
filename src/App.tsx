@@ -1,10 +1,14 @@
-import { addEdge, Background, ConnectionMode, Controls, MiniMap, ReactFlow, useEdgesState, useNodesState, type OnConnect } from '@xyflow/react'
+import { addEdge, Background, ConnectionMode, Controls, MarkerType, MiniMap, ReactFlow, useEdgesState, useNodesState, type OnConnect } from '@xyflow/react'
 import { useCallback } from 'react';
 import colors from 'tailwindcss/colors';
 import '@xyflow/react/dist/style.css';
 import DockStation from './components/dockStation';
 import { Square } from './components/square';
+import DefaultEdge from './components/defaultEdge';
 
+const edgeTypes = {
+  default: DefaultEdge
+}
 
 const nodeTypes = {
   square: Square,
@@ -39,9 +43,18 @@ function App() {
         edges={edges}
         onConnect={onConnect}
         nodeTypes={nodeTypes}
+        edgeTypes={edgeTypes}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         connectionMode={ConnectionMode.Loose}
+        defaultEdgeOptions={{
+          markerEnd: {
+            type: MarkerType.Arrow,
+            width: 14,
+            height: 14,
+            color: '#B1B1B7',
+          },
+        }}
       >
         <MiniMap />
         <DockStation />
