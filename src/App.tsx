@@ -5,6 +5,8 @@ import '@xyflow/react/dist/style.css';
 import DockStation from './components/dockStation';
 import { Square } from './components/square';
 import DefaultEdge from './components/defaultEdge';
+import { Circle } from './components/circle';
+import { Note } from './components/note';
 
 const edgeTypes = {
   default: DefaultEdge
@@ -12,6 +14,8 @@ const edgeTypes = {
 
 const nodeTypes = {
   square: Square,
+  circle: Circle,
+  note: Note
 };
 
 const initialNodes = [

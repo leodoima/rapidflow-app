@@ -39,7 +39,7 @@ export default function DockStation() {
                     <DockIcon>
                         <Tooltip>
                             <TooltipTrigger asChild>
-                                <CircleIcon size={32} weight="duotone" />
+                                <CircleIcon size={32} weight="duotone" onClick={() => handleCreateNode('circle')} />
                             </TooltipTrigger>
                             <TooltipContent>
                                 Circle
@@ -49,7 +49,7 @@ export default function DockStation() {
                     <DockIcon>
                         <Tooltip>
                             <TooltipTrigger asChild>
-                                <ChatCenteredDotsIcon size={32} weight="duotone" />
+                                <ChatCenteredDotsIcon size={32} weight="duotone" onClick={() => handleCreateNode('note')} />
                             </TooltipTrigger>
                             <TooltipContent>
                                 Text
